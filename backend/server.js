@@ -7,10 +7,17 @@ app.get("/", (req,res)=>{
     res.send("Homepage");
 });
 
-connectDB();
-const PORT = process.env.PORT || 3000
-app.listen(PORT,()=>{
-    console.log(`Server running on port ${PORT}`);
-})
 
+const startServer=async()=>{
+    try {
+        await connectDB();
+        const PORT = process.env.PORT || 3000
+        app.listen(PORT,()=>{
+            console.log(`Server running on port ${PORT}`);
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
+startServer();
